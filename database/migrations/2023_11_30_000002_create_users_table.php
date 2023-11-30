@@ -17,13 +17,14 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->unsignedBigInteger('lang_id');
-            $table->unsignedBigInteger('role_id');
+            $table->unsignedBigInteger('lang_id')->default(2);; // español
+            $table->unsignedBigInteger('role_id')->default(2);; // cliente
             $table->rememberToken();
             $table->timestamps();
             $table->foreign('lang_id')->references('id')->on('languages');
             $table->foreign('role_id')->references('id')->on('roles');
         });
+
     }
 
     /**

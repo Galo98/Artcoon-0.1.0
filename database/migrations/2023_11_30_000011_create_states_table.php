@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+use Illuminate\Support\Facades\DB;
 return new class extends Migration
 {
     /**
@@ -14,9 +14,23 @@ return new class extends Migration
         Schema::create('states', function (Blueprint $table) {
             $table->id();
             $table->string('state_name');
-            $table->float('state_price', 4, 2)->nullable();
             $table->timestamps();
         });
+
+        DB::table('states')->insert([
+            [
+                'state_name' => 'Working'
+            ],
+            [
+                'state_name' => 'Pending'
+            ],
+            [
+                'state_name' => 'Finshed'
+            ],
+            [
+                'state_name' => 'Canceled'
+            ],
+        ]);
     }
 
     /**
