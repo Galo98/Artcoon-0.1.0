@@ -16,11 +16,13 @@ Route::view('/', 'welcome');
 
 Route::middleware('auth')->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
+    
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/order', [OrderController::class, 'index'])->name('order.makeOrder');
+    Route::get('/order', [OrderController::class, 'create'])->name('order.makeOrder');
+    Route::post('/orderConfirm', [OrderController::class, 'confirm'])->name('order.confirmOrder');
     Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 });
 

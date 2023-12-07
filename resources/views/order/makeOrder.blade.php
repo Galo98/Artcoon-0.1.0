@@ -36,80 +36,60 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg border-prin">
                 <div class="p-6 text-gray-900 dark:text-gray-100 ">
 
-                    <form class="flex flex-col justify-center items-center gap-4" method="POST" action="{{ route('order.store') }}" onsubmit="return validarFormulario()">
+                    <form class="flex flex-col justify-center items-center gap-4" method="POST" action="{{ route('order.confirmOrder') }}">
 
                         @csrf
 
                         <div>
                             <label for="type">{{__('Type of commission')}}</label>
                             <select class="flex-grow-0 form-select dark:bg-transparent rounded-md" name="type" id="type" title="{{__('Type of commission')}}" description="{{__('Select the type of commission')}}">
-                                <option value="" selected>{{__('Select an option')}}</option>
-                                <option value="1">Scketch</option>
-                                <option value="2">Simple color</option>
-                                <option value="3">Full color</option>
+                                <option value="">{{__('Select an option')}}</option>
+                                <option value="1" {{ old('type') || request('type') == '1' ? 'selected' : '' }}>Scketch</option>
+                                <option value="2" {{ old('type') || request('type') == '2' ? 'selected' : '' }}>Simple color</option>
+                                <option value="3" {{ old('type') || request('type') == '3' ? 'selected' : '' }}>Full color</option>
                             </select>
-                            <div id="errortype" class="error-message"></div>
+                            <x-input-error :messages="$errors->get('type')" />
                         </div>
 
                         <div>
                             <label for="size">{{__('Size of commission')}}</label>
                             <select class="flex-grow-0 form-select dark:bg-transparent" name="size" id="size" title="{{__('Size of commission')}}" description="{{__('Select the size of commission')}}">
-                                <option value="" selected>{{__('Select an option')}}</option>
-                                <option value="1">Icon</option>
-                                <option value="2">Half body</option>
-                                <option value="3">Full body</option>
+                                <option value="">{{__('Select an option')}}</option>
+                                <option value="1" {{ old('size') || request('size') == '1' ? 'selected' : '' }}>Icon</option>
+                                <option value="2" {{ old('size') || request('size') == '2' ? 'selected' : '' }}>Half body</option>
+                                <option value="3" {{ old('size') || request('size') == '3' ? 'selected' : '' }}>Full body</option>
                             </select>
-                            <div id="errorsize" class="error-message"></div>
+                            <x-input-error :messages="$errors->get('size')" />
                         </div>
 
                         <div>
                             <label for="characters">{{__('Amount of characters')}}</label>
                             <select class="flex-grow-0 form-select dark:bg-transparent" name="characters" id="characters" title="{{__('Amount of characters')}}" description="{{__('Select the amount of characters')}}">
-                                <option value="" selected>{{__('Select an option')}}</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <option value="">{{__('Select an option')}}</option>
+                                <option value="1" {{ old('characters') || request('characters') == '1' ? 'selected' : '' }}>One</option>
+                                <option value="2" {{ old('characters') || request('characters') == '2' ? 'selected' : '' }}>Two</option>
+                                <option value="3" {{ old('characters') || request('characters') == '3' ? 'selected' : '' }}>Three</option>
                             </select>
-                            <div id="errorcharacters" class="error-message"></div>
+                            <x-input-error :messages="$errors->get('characters')" />
                         </div>
 
                         <div>
-                            <label for="bkg">{{__('Kind of background')}}</label>
-                            <select class="flex-grow-0 form-select dark:bg-transparent" name="bkg" id="bkg" title="{{__('Kind of background')}}" description="{{__('Select the kind of background')}}">
-                                <option value="" selected>{{__('Select an option')}}</option>
-                                <option value="1">{{__('Transparent')}}</option>
-                                <option value="2">{{__('Plain')}}</option>
-                                <option value="3">{{__('Simple')}}</option>
-                                <option value="4">{{__('Complex')}}</option>
+                            <label for="background">{{__('Kind of background')}}</label>
+                            <select class="flex-grow-0 form-select dark:bg-transparent" name="background" id="background" title="{{__('Kind of background')}}" description="{{__('Select the kind of background')}}">
+                                <option value="">{{__('Select an option')}}</option>
+                                <option value="1" {{ old('background') || request('background') == '1' ? 'selected' : '' }}>{{__('Transparent')}}</option>
+                                <option value="2" {{ old('background') || request('background') == '2' ? 'selected' : '' }}>{{__('Plain')}}</option>
+                                <option value="3" {{ old('background') || request('background') == '3' ? 'selected' : '' }}>{{__('Simple')}}</option>
+                                <option value="4" {{ old('background') || request('background') == '4' ? 'selected' : '' }}>{{__('Complex')}}</option>
                             </select>
-                            <div id="errorbkg" class="error-message"></div>
+                            <x-input-error :messages="$errors->get('background')" />
                         </div>
 
                         <div>
                             <label for="pub">{{__('Make it public')}}</label>
-                            <input type="checkbox" name="pub" id="pub" checked title="{{__('Make it public when it\'s finished')}}" description="{{__('Make it public when it\'s finished')}}">
+                            <input type="checkbox" name="pub" id="pub" {{ old('pub') == 'on' || request('pub') == 'on'  ? 'checked' : '' }} title="{{__('Make it public when it\'s finished')}}" description="{{__('Make it public when it\'s finished')}}">
                         </div>
 
-                        <div class="popup hidden fixed w-1/3 h-1/3 flex flex-col gap-2 justify-center items-center bg-white border-2 border-#FF90AA">
-                            <h1 class="text-2xl font-bold">{{__('Order review')}}</h1>
-
-                            <p>{{__('Type of commission')}} : </p>
-                            <p>{{__('Size of commission')}} : </p>
-                            <p>{{__('Amount of characters')}} : </p>
-                            <p>{{__('Kind of background')}} : </p>
-                            <p>{{__('Make it public')}} : </p>
-                            <p>{{__('Total price')}} : </p>
-
-
-
-                            <p></p>
-
-
-                            <div>
-                                <x-primary-button class="sendOrder">{{__('Make the order')}}</x-primary-button>
-                                <x-secondary-button class="send-close">{{__('Close and modify')}}</x-secondary-button>
-                            </div>
-                        </div>
                         <!-- 
                         <x-dropdown>
                             <x-slot:trigger>titulo</x-slot:trigger>
@@ -124,39 +104,3 @@
         </div>
     </div>
 </x-app-layout>
-
-<script>
-    function validarFormulario() {
-        var camposSelect = document.querySelectorAll('.form-select');
-        var validacionCorrecta = true;
-
-        camposSelect.forEach(function(campo) {
-            var campoId = campo.id;
-            var valorSeleccionado = campo.value;
-            var errorCampo = document.getElementById('error' + campoId);
-
-            if (valorSeleccionado === '') {
-                errorCampo.innerHTML = "{{__('Please, select an option')}}";
-                validacionCorrecta = false;
-            } else {
-                errorCampo.innerHTML = '';
-            }
-        });
-
-        return validacionCorrecta;
-    }
-    document.querySelector(".send").addEventListener("click", function() {
-        event.preventDefault();
-        validacion = validarFormulario();
-        if (validacion) {
-            // Mostrar el pop up
-            document.querySelector(".popup").classList.remove("hidden");
-        }
-    });
-
-
-    document.querySelector(".send-close").addEventListener("click", function() {
-        document.querySelector(".popup").classList.add("hidden");
-        event.preventDefault();
-    });
-</script>

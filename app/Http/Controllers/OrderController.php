@@ -15,13 +15,25 @@ class OrderController extends Controller
 
     public function index()
     {
-        return view('order.makeOrder');
+        
     }
 
 
     public function create()
     {
-        //
+        return view('order.makeOrder');
+    }
+
+    public function confirm(Request $request)
+    {
+        $request->validate([
+            'type' => 'required',
+            'size' => 'required',
+            'characters' => 'required',
+            'background' => 'required',
+        ]);
+
+        return view('order.confirmOrder');
     }
 
 
@@ -31,8 +43,9 @@ class OrderController extends Controller
             'type' => 'required',
             'size' => 'required',
             'characters' => 'required',
-            'bkg' => 'required',
+            'background' => 'required',
         ]);
+
         $orderPublic = $request->get('pub') ?? 'false';
 
         if ($orderPublic === 'on') {
@@ -41,7 +54,7 @@ class OrderController extends Controller
             $orderPublic = false;
         }
 
-        $total = Background::where('id', $request->get('bkg'))->value('bkg_price')
+        $total = Background::where('id', $request->get('background'))->value('bkg_price')
             + Character::where('id', $request->get('characters'))->value('char_price')
             + Size::where('id', $request->get('size'))->value('size_price')
             + Type::where('id', $request->get('type'))->value('type_price');
@@ -54,7 +67,7 @@ class OrderController extends Controller
             'type_id'        => $request->get('type'),
             'size_id'        => $request->get('size'),
             'character_id'   => $request->get('characters'),
-            'bkg_id'         => $request->get('bkg')
+            'bkg_id'         => $request->get('background')
         ]);
 
         // session()->flash('status','Order created successfully!');

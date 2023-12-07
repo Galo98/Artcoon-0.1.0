@@ -25,11 +25,13 @@ return new class extends Migration
             $table->unsignedBigInteger('size_id');
             $table->unsignedBigInteger('character_id');
             $table->unsignedBigInteger('bkg_id');
+            $table->unsignedBigInteger('state_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('type_id')->references('id')->on('types');
             $table->foreign('size_id')->references('id')->on('sizes');
             $table->foreign('character_id')->references('id')->on('characters');
             $table->foreign('bkg_id')->references('id')->on('backgrounds');
+            $table->foreign('state_id')->references('id')->on('states');
         });
     }
 
