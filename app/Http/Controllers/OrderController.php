@@ -3,37 +3,67 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Background;
+use App\Models\Character;
+use App\Models\Size;
+use App\Models\Type;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+        return view('order.makeOrder');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'type' => 'required',
+            'size' => 'required',
+            'characters' => 'required',
+            'bkg' => 'required',
+        ]);
+        $orderPublic = $request->get('pub') ?? 'false';
+
+        if ($orderPublic === 'on') {
+            $orderPublic = true;
+        } else {
+            $orderPublic = false;
+        }
+
+        $total = Background::where('id', $request->get('bkg'))->value('bkg_price')
+            + Character::where('id', $request->get('characters'))->value('char_price')
+            + Size::where('id', $request->get('size'))->value('size_price')
+            + Type::where('id', $request->get('type'))->value('type_price');
+
+        Order::create([
+            'order_totPrice' => $total,
+            'order_link'     => 'paypal.com',
+            'order_public'   => $orderPublic,
+            'user_id'        => auth()->id(),
+            'type_id'        => $request->get('type'),
+            'size_id'        => $request->get('size'),
+            'character_id'   => $request->get('characters'),
+            'bkg_id'         => $request->get('bkg')
+        ]);
+
+        // session()->flash('status','Order created successfully!');
+        // esto es lo mismo que hacerlo con ->with() en el to_route
+
+        return to_route('order.makeOrder')->with('status', __('Order created successfully!'));
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(Order $order)
     {
         //

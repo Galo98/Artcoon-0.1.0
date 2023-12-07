@@ -12,9 +12,18 @@
     --c4: #bc4ed8;
     --c5: #f988ff;
     --c6: #FF90AA;
+    --c7: #9b9696;
 
 }
 
-.bg-white{
+.bg-prin {
     background-color: var(--c6);
+}
+
+.border-prin {
+    border: 2px solid var(--c6);
+}
+
+.bg-sec {
+    background-color: var(--c7);
 }

@@ -14,12 +14,11 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->float('order_totPrice', 8, 2)->nullable();
-            $table->dateTime('order_date')->nullable();
+            $table->dateTime('order_date')->default(now());
             $table->dateTime('order_delivery')->nullable();
-            $table->dateTime('fecha_pago')->nullable();
-            $table->string('order_link');
             $table->char('order_pay', 1)->nullable();
-            $table->boolean('order_public')->default(true);
+            $table->string('order_link');
+            $table->boolean('order_public');
             $table->timestamps();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('type_id');

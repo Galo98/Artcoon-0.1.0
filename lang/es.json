@@ -143,6 +143,8 @@
     "You're logged in!": "¡Usted está conectado!",
     "Your email address is unverified.": "Su dirección de correo electrónico no está verificada.",
     "Make an order" : "Realizar pedido",
+    "Make the order" : "Realizar el pedido",
+    "Select an option" : "Seleccione una opcion" ,
     "Type of commission" : "Tipo de comision",
     "Select the type of commission" : "Seleccione el tipo de comision",
     "Size of commission" : "Tamaño de comision",
@@ -154,5 +156,12 @@
     "Transparent" : "Transparente",
     "Plain" : "Plano",
     "Simple" : "Simple",
-    "Complex" : "Complejo"
+    "Complex" : "Complejo",
+    "Make it public" : "Hacerlo publico",
+    "Make it public when it's finished" : "Hacerlo público cuando esté terminado",
+    "Please, select an option" : "Por favor, seleccione una opción",
+    "Order created successfully!" : "¡Pedido realizado exitosamente!",
+    "Order review" : "Revisión del pedido",
+    "Close and modify" : "Cerrar y modificar",
+    "Total price" : "Precio total"
 }
