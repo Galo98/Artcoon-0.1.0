@@ -16,6 +16,7 @@
                         <input type="hidden" name="characters" value="{{request('characters')}}">
                         <input type="hidden" name="background" value="{{request('background')}}">
                         <input type="hidden" name="pub" value="{{request('pub')}}">
+                        
                         <p>{{__('Type of commission')}} : {{request('type')}}</p>
                         <p>{{__('Size of commission')}} : {{request('size')}}</p>
                         <p>{{__('Amount of characters')}} : {{request('characters')}}</p>

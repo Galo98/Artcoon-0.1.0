@@ -67,7 +67,8 @@ class OrderController extends Controller
             'type_id'        => $request->get('type'),
             'size_id'        => $request->get('size'),
             'character_id'   => $request->get('characters'),
-            'bkg_id'         => $request->get('background')
+            'bkg_id'         => $request->get('background'),
+            'state_id'       => '2'
         ]);
 
         // session()->flash('status','Order created successfully!');
