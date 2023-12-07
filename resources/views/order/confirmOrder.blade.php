@@ -16,13 +16,14 @@
                         <input type="hidden" name="characters" value="{{request('characters')}}">
                         <input type="hidden" name="background" value="{{request('background')}}">
                         <input type="hidden" name="pub" value="{{request('pub')}}">
-                        
-                        <p>{{__('Type of commission')}} : {{request('type')}}</p>
-                        <p>{{__('Size of commission')}} : {{request('size')}}</p>
-                        <p>{{__('Amount of characters')}} : {{request('characters')}}</p>
-                        <p>{{__('Kind of background')}} : {{request('background')}}</p>
-                        <p>{{__('Make it public')}} : {{request('pub')}}</p>
-                        <p>{{__('Total price')}} : </p>
+                        <input type="hidden" name="total" value="{{$total}}">
+
+                        <p>{{__('Type of commission')}} : {{$typeDesc->type_name}} </p>
+                        <p>{{__('Size of commission')}} : {{$sizeDesc->size_name}}</p>
+                        <p>{{__('Amount of characters')}} : {{$charDesc->char_name}}</p>
+                        <p>{{__('Kind of background')}} : {{$backDesc->bkg_name}}</p>
+                        <p>{{__('Make it public')}} : {{is_null(request('pub')) ? 'No' : __('Yes')}}</p>
+                        <p>{{__('Total price')}} : USD {{$total}} </p>
                         <p></p>
                         <div>
                             <x-primary-button formmethod="POST" formaction="{{ route('order.store') }}">{{__('Make the order')}}</x-primary-button>

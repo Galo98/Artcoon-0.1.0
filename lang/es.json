@@ -163,5 +163,6 @@
     "Order created successfully!" : "¡Pedido realizado exitosamente!",
     "Order review" : "Revisión del pedido",
     "Close and modify" : "Cerrar y modificar",
-    "Total price" : "Precio total"
+    "Total price" : "Precio total",
+    "Yes" : "Si"
 }
