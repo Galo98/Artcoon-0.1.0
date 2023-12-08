@@ -164,5 +164,14 @@
     "Order review" : "Revisión del pedido",
     "Close and modify" : "Cerrar y modificar",
     "Total price" : "Precio total",
-    "Yes" : "Si"
+    "Yes" : "Si",
+    "My orders" : "Mis pedidos",
+    "Modify" : "Modificar",
+    "You have not placed orders yet" : "Aún no has realizado pedidos",
+    "Order state" : "Estado del pedido",
+    "Last modification" : "Última modificación",
+    "Creation date" : "Fecha de creación",
+    "Payment approved?" : "¿Pago aprobado?",
+    "Payment link" : "Link de pago",
+    "Pay" : "Pagar"
 }

@@ -6,7 +6,7 @@ use App\Models\Background;
 use App\Models\Character;
 use App\Models\Size;
 use App\Models\Type;
-use App\Models\States;
+use App\Models\State;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -58,8 +58,8 @@ class Order extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function states()
+    public function state()
     {
-        return $this->belongsTo(User::class, 'state_id');
+        return $this->belongsTo(State::class, 'state_id');
     }
 }

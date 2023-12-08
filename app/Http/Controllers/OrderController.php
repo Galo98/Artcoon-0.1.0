@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\Background;
 use App\Models\Character;
@@ -14,14 +15,28 @@ class OrderController extends Controller
 {
 
     public function index()
-    {
-        
+    {   
+        $allOrders = Order::with('type','size','background','character','state')->where('user_id',Auth::id())->get();
+
+        return view('order.showOrders',[
+            'orders' => $allOrders
+        ]);
     }
 
 
     public function create()
     {
-        return view('order.makeOrder');
+        $types = Type::all();
+        $sizes = Size::all();
+        $chars = Character::all();
+        $bkgs = Background::all();
+        
+        return view('order.makeOrder',[
+            'types' => $types,
+            'sizes' => $sizes,
+            'chars' => $chars,
+            'bkgs'  => $bkgs
+        ]);
     }
 
     public function confirm(Request $request)
