@@ -12,7 +12,9 @@ class BackgroundController extends Controller
 
     public function index()
     {
-        /* $this->authorize('viewAny'); */
+        if (auth()->user()->role_id != 1) {
+            abort(403);
+        }
 
         $backgrounds = Background::all();
 
@@ -30,7 +32,9 @@ class BackgroundController extends Controller
     
     public function store(Request $request)
     {
-        
+        if (auth()->user()->role_id != 1) {
+            abort(403);
+        }
 
         $request->validate([
             'bkgName' => 'required',
@@ -58,6 +62,9 @@ class BackgroundController extends Controller
      */
     public function edit(Background $bkg)
     {
+        if (auth()->user()->role_id != 1) {
+            abort(403);
+        }
         return view('background.editBackground', [
             'back' => $bkg
         ]);
@@ -68,6 +75,9 @@ class BackgroundController extends Controller
      */
     public function update(Request $request, Background $bkg)
     {
+        if (auth()->user()->role_id != 1) {
+            abort(403);
+        }
         $validated = $request->validate([
             'bkg_name' => 'required',
             'bkg_price' => ['required','min:1', 'max:4'],

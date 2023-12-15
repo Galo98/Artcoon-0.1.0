@@ -10,7 +10,9 @@ class TypeController extends Controller
 {
     public function index()
     {
-        /* $this->authorize('viewAny'); */
+        if (auth()->user()->role_id != 1) {
+            abort(403);
+        }
 
         $type = Type::all();
 
@@ -32,7 +34,9 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        /* $this->authorize('viewAny'); */
+        if (auth()->user()->role_id != 1) {
+            abort(403);
+        }
 
         $request->validate([
             'type_name' => 'required',
@@ -60,7 +64,9 @@ class TypeController extends Controller
      */
     public function edit(Type $type)
     {
-        /* $this->authorize('viewAny'); */
+        if (auth()->user()->role_id != 1) {
+            abort(403);
+        }
 
         return view('type.editType', [
             'type' => $type
@@ -72,7 +78,9 @@ class TypeController extends Controller
      */
     public function update(Request $request, Type $type)
     {
-        /* $this->authorize('update', $type); */
+        if (auth()->user()->role_id != 1) {
+            abort(403);
+        }
 
         $validated = $request->validate([
             'type_name' => 'required',

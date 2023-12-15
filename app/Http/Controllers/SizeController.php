@@ -12,14 +12,15 @@ class SizeController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        /* $this->authorize('viewAny'); */
+    {   
+        if(auth()->user()->role_id != 1){
+            abort(403);
+        }
+            $sizes = Size::all();
+            return view('size.showSize', [
+                'sizes' => $sizes
+            ]);
 
-        $sizes = Size::all();
-
-        return view('size.showSize', [
-            'sizes' => $sizes
-        ]);
     }
 
     /**
@@ -35,6 +36,9 @@ class SizeController extends Controller
      */
     public function store(Request $request)
     {
+        if (auth()->user()->role_id != 1) {
+            abort(403);
+        }
         $request->validate([
             'size_name' => 'required',
             'size_price' => 'required',
@@ -61,6 +65,9 @@ class SizeController extends Controller
      */
     public function edit(Size $size)
     {
+        if (auth()->user()->role_id != 1) {
+            abort(403);
+        }
         return view('size.editSize', [
             'size' => $size
         ]);
@@ -71,6 +78,9 @@ class SizeController extends Controller
      */
     public function update(Request $request, Size $size)
     {
+        if (auth()->user()->role_id != 1) {
+            abort(403);
+        }
         $validated = $request->validate([
             'size_name' => 'required',
             'size_price' => ['required', 'min:1', 'max:4'],

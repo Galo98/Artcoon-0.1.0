@@ -13,7 +13,9 @@ class CharacterController extends Controller
      */
     public function index()
     {
-        /* $this->authorize('viewAny'); */
+        if (auth()->user()->role_id != 1) {
+            abort(403);
+        }
 
         $chars = Character::all();
 
@@ -35,6 +37,9 @@ class CharacterController extends Controller
      */
     public function store(Request $request)
     {
+        if (auth()->user()->role_id != 1) {
+            abort(403);
+        }
         $request->validate([
             'char_name' => 'required',
             'char_price' => 'required',
@@ -61,6 +66,9 @@ class CharacterController extends Controller
      */
     public function edit(Character $char)
     {
+        if (auth()->user()->role_id != 1) {
+            abort(403);
+        }
         return view('character.editCharacter', [
             'char' => $char
         ]);
@@ -71,6 +79,9 @@ class CharacterController extends Controller
      */
     public function update(Request $request, Character $char)
     {
+        if (auth()->user()->role_id != 1) {
+            abort(403);
+        }
         $validated = $request->validate([
             'char_name' => 'required',
             'char_price' => ['required', 'min:1', 'max:4'],
@@ -85,7 +96,7 @@ class CharacterController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Character $char)
-    {
+    {   
         try {
             $this->authorize('delete', $char);
             $char->delete();

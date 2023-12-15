@@ -12,7 +12,7 @@ class SizePolicy
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
-    {
+    {   
         return $user->role_id === 1;
     }
 
@@ -44,7 +44,7 @@ class SizePolicy
      * Determine whether the user can delete the model.
      */
     public function delete(User $user, Size $size): bool
-    {
+    {   
         return $user->role_id === 1;
     }
 
