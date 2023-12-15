@@ -32,9 +32,9 @@
                     <div class="hidden sm:flex sm:items-center sm:ms-6">
                         <x-dropdown>
                             <x-slot name="trigger">
-                                <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                                <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-transparent dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
 
-                                    <div>Gestion del formulario</div>
+                                    <div>{{__('Modify order form')}}</div>
 
                                     <div class="ms-1">
                                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -50,10 +50,10 @@
                                 <x-dropdown-link :href="route('type.index')" :active="request()->routeIs('type.*')">
                                     {{ __('Types') }}
                                 </x-dropdown-link>
-                                <x-dropdown-link :href="route('char.index')" :active="request()->routeIs('type.*')">
+                                <x-dropdown-link :href="route('char.index')" :active="request()->routeIs('char.*')">
                                     {{ __('Characters') }}
                                 </x-dropdown-link>
-                                <x-dropdown-link :href="route('size.index')" :active="request()->routeIs('type.*')">
+                                <x-dropdown-link :href="route('size.index')" :active="request()->routeIs('size.*')">
                                     {{ __('Sizes') }}
                                 </x-dropdown-link>
                             </x-slot>
@@ -128,6 +128,12 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('type.index')" :active="request()->routeIs('type.*')">
                 {{ __('Types') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('char.index')" :active="request()->routeIs('char.*')">
+                {{ __('Characters') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('size.index')" :active="request()->routeIs('size.*')">
+                {{ __('Sizes') }}
             </x-responsive-nav-link>
             @endif
         </div>

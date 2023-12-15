@@ -200,5 +200,13 @@
     "Character deleted successfully!" : "Personaje eliminado satisfactoriamente!",
     "Error deleting, character in use!" : "Error al eliminar, personaje en uso!",
     "Character name" : "Nombre el personaje",
-    "New character" : "Nuevo personaje"
+    "New character" : "Nuevo personaje",
+    "Size created successfully!" : "Tamaño creado satisfactoriamente!",
+    "Size edited successfully!" : "Tamaño editado satisfactoriamente!",
+    "Size deleted successfully!" : "Tamaño eliminado satisfactoriamente!",
+    "Error deleting, size in use!" : "Error al eliminar, tamaño en uso!",
+    "Edit sizes" : "Editar tamaños",
+    "Size name" : "Nombre del tamaño",
+    "New size" : "Nuevo tamaño",
+    "Modify order form" : "Modificar formulario de pedidos"
 }

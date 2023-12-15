@@ -15,18 +15,18 @@
                                 @csrf
                                 @method('PUT')
                                 <div>
-                                    <input type="text" class="dark:text-gray-900" name="bkg_name" placeholder="{{__('Background name')}}" @if(old('bkgName') !=null ) value="{{old('bkgName')}}" @elseif (isset($back)) value="{{$back->bkg_name}}" @endif>
-                                    <x-input-error :messages="$errors->get('bkgName')" />
+                                    <input type="text" class="dark:text-gray-900" name="size_name" placeholder="{{__('Size name')}}" @if(old('size_name') !=null ) value="{{old('size_name')}}" @elseif (isset($size)) value="{{$size->size_name}}" @endif>
+                                    <x-input-error :messages="$errors->get('size_name')" />
                                 </div>
                                 <div>
-                                    <input type="text" class="dark:text-gray-900" name="bkg_price" pattern="^(0|\d{1,4}(\.\d{1,2})?)$" title="{{__('Please enter a valid number.Example:1234.56 or 0')}}" placeholder="{{__('Price')}}" @if(old('bkgPrice') !=null ) value="{{old('bkgPrice')}}" @elseif (isset($back)) value="{{$back->bkg_price}}" @endif>
-                                    <x-input-error :messages=" $errors->get('bkgPrice')" />
+                                    <input type="text" class="dark:text-gray-900" name="size_price" pattern="^(0|\d{1,4}(\.\d{1,2})?)$" title="{{__('Please enter a valid number.Example:1234.56 or 0')}}" placeholder="{{__('Price')}}" @if(old('size_price') !=null ) value="{{old('size_price')}}" @elseif (isset($size)) value="{{$size->size_price}}" @endif>
+                                    <x-input-error :messages=" $errors->get('size_price')" />
                                 </div>
 
 
 
-                                <x-primary-button formaction="{{ route('bkg.updateBackground',$back) }}">{{__('Modify')}}</x-primary-button>
-                                <x-nav-link href="{{route('bkg.background')}}">{{__('Cancel')}}</x-nav-link> </p>
+                                <x-primary-button formaction="{{ route('size.update',$size) }}">{{__('Modify')}}</x-primary-button>
+                                <x-nav-link href="{{route('size.index')}}">{{__('Cancel')}}</x-nav-link> </p>
                             </div>
                         </form>
                     </div>
