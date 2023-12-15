@@ -173,5 +173,17 @@
     "Creation date" : "Fecha de creación",
     "Payment approved?" : "¿Pago aprobado?",
     "Payment link" : "Link de pago",
-    "Pay" : "Pagar"
+    "Pay" : "Pagar",
+    "Backgrounds" : "Fondos",
+    "Background name" : "Nombre del fondo",
+    "Background price" : "Precio del fondo",
+    "There is no background in the database" : "No hay fondos en la base de datos",
+    "New background" : "Nuevo fondo",
+    "Please enter a valid number.Example:1234.56 or 0" : "Ingrese un número válido.Ejemplo:1234.56 o 0",
+    "Price" : "Precio",
+    "Background created successfully!" : "Fondo creado satisfactoriamente!",
+    "Delete" : "Eliminar",
+    "Background deleted successfully!" : "Fondo eliminado satisfactoriamente!",
+    "Error deleting, background in use!" : "Error al eliminar, fondo en uso!",
+    "Edit backgrounds" : "Editar fondos"
 }

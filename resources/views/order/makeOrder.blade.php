@@ -90,12 +90,6 @@
                             <input type="checkbox" name="pub" id="pub" {{ old('pub') == 'on' || request('pub') == 'on'  ? 'checked' : '' }} title="{{__('Make it public when it\'s finished')}}" description="{{__('Make it public when it\'s finished')}}">
                         </div>
 
-                        <!-- 
-                        <x-dropdown>
-                            <x-slot:trigger>titulo</x-slot:trigger>
-                            <x-slot:content>A</x-slot:content>
-                        </x-dropdown> -->
-
 
                         <x-primary-button>{{__('Make the order')}}</x-primary-button>
                     </form>

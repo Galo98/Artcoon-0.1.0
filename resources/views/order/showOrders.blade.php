@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Make an order') }}
+            {{ __('My orders') }}
         </h2>
     </x-slot>
 
@@ -29,8 +29,6 @@
                             <p>{{__('Creation date')}} : {{$order->created_at}} </p>
                             <p>{{__('Last modification')}} : {{$order->updated_at}} </p>
 
-                            <x-primary-button>{{__('Modify')}}</x-primary-button>
-                            <x-cancel-button>{{__('Cancel')}}</x-cancel-button>
                         </form>
                     </div>
                 </div>

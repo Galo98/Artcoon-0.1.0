@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('backgrounds', function (Blueprint $table) {
             $table->id();
             $table->string('bkg_name');
-            $table->float('bkg_price', 4, 2)->nullable();
+            $table->float('bkg_price', 8, 2)->nullable();
             $table->timestamps();
         });
 

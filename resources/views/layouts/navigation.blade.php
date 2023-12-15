@@ -1,6 +1,9 @@
 @if (session('status'))
 <div class="bg-green-600 text-green-100 text-center text-lg font-bold p-2">{{session('status')}}</div>
 @endif
+@if (session('error'))
+<div class="bg-red-600 text-red-100 text-center text-lg font-bold p-2">{{session('error')}}</div>
+@endif
 
 <nav x-data="{ open: false }" class="bg-prin dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
@@ -17,12 +20,19 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @if (auth()->user()->role_id == 2)
                     <x-nav-link :href="route('order.showOrders')" :active="request()->routeIs('order.showOrders')">
                         {{ __('My orders') }}
                     </x-nav-link>
                     <x-nav-link :href="route('order.makeOrder')" :active="request()->routeIs('order.makeOrder')">
                         {{ __('Make an order') }}
                     </x-nav-link>
+                    @endif
+                    @if (auth()->user()->role_id == 1)
+                    <x-nav-link :href="route('bkg.background')" :active="request()->routeIs('bkg.*')">
+                        {{ __('Backgrounds') }}
+                    </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -77,12 +87,19 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            @if (auth()->user()->role_id == 2)
             <x-responsive-nav-link :href="route('order.showOrders')" :active="request()->routeIs('order.showOrders')">
                 {{ __('My orders') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('order.makeOrder')" :active="request()->routeIs('order.makeOrder')">
                 {{ __('Make an order') }}
             </x-responsive-nav-link>
+            @endif
+            @if (auth()->user()->role_id == 1)
+            <x-responsive-nav-link :href="route('bkg.background')" :active="request()->routeIs('bkg.*')">
+                {{ __('Backgrounds') }}
+            </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
