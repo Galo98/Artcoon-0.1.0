@@ -29,12 +29,36 @@
                     </x-nav-link>
                     @endif
                     @if (auth()->user()->role_id == 1)
-                    <x-nav-link :href="route('bkg.background')" :active="request()->routeIs('bkg.*')">
-                        {{ __('Backgrounds') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('type.index')" :active="request()->routeIs('type.*')">
-                        {{ __('Types') }}
-                    </x-nav-link>
+                    <div class="hidden sm:flex sm:items-center sm:ms-6">
+                        <x-dropdown>
+                            <x-slot name="trigger">
+                                <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+
+                                    <div>Gestion del formulario</div>
+
+                                    <div class="ms-1">
+                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                </button>
+                            </x-slot>
+                            <x-slot name="content">
+                                <x-dropdown-link :href="route('bkg.background')" :active="request()->routeIs('bkg.*')">
+                                    {{ __('Backgrounds') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link :href="route('type.index')" :active="request()->routeIs('type.*')">
+                                    {{ __('Types') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link :href="route('char.index')" :active="request()->routeIs('type.*')">
+                                    {{ __('Characters') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link :href="route('size.index')" :active="request()->routeIs('type.*')">
+                                    {{ __('Sizes') }}
+                                </x-dropdown-link>
+                            </x-slot>
+                        </x-dropdown>
+                    </div>
                     @endif
                 </div>
             </div>

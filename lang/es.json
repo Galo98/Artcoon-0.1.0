@@ -194,5 +194,11 @@
     "Type deleted successfully!": "Tipo eliminado satisfactoriamente!",
     "Error deleting, type in use!": "Error al eliminar, tipo en uso!",
     "Edit types" : "Editar tipos",
-    "Type edited successfully!" : "Tipo editado satisfactoriamente!"
+    "Type edited successfully!" : "Tipo editado satisfactoriamente!",
+    "Character created successfully!" : "Personaje creado satisfactoriamente!",
+    "Character edited successfully!" : "Personaje editado satisfactoriamente!",
+    "Character deleted successfully!" : "Personaje eliminado satisfactoriamente!",
+    "Error deleting, character in use!" : "Error al eliminar, personaje en uso!",
+    "Character name" : "Nombre el personaje",
+    "New character" : "Nuevo personaje"
 }

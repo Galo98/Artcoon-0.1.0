@@ -10,6 +10,7 @@ class Character extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'char_name',
         'char_price'
     ];

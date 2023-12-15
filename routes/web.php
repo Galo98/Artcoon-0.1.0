@@ -41,6 +41,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/types/{type}/edit', [TypeController::class, 'edit'])->name('type.edit');
     Route::put('/types/{type}', [TypeController::class, 'update'])->name('type.update');
     Route::delete('/types/{type}', [TypeController::class, 'destroy'])->name('type.destroy');
+
+    Route::get('/characters', [CharacterController::class, 'index'])->name('char.index');
+    Route::post('/characters', [CharacterController::class, 'store'])->name('char.store');
+    Route::get('/characters/{char}/edit', [CharacterController::class, 'edit'])->name('char.edit');
+    Route::put('/characters/{char}', [CharacterController::class, 'update'])->name('char.update');
+    Route::delete('/characters/{char}', [CharacterController::class, 'destroy'])->name('char.destroy');
+
+    Route::get('/sizes', [SizeController::class, 'index'])->name('size.index');
+    Route::post('/sizes', [SizeController::class, 'store'])->name('size.store');
+    Route::get('/sizes/{size}/edit', [SizeController::class, 'edit'])->name('size.edit');
+    Route::put('/sizes/{size}', [SizeController::class, 'update'])->name('size.update');
+    Route::delete('/sizes/{size}', [SizeController::class, 'destroy'])->name('size.destroy');
 });
 
 require __DIR__ . '/auth.php';
