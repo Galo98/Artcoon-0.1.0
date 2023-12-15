@@ -185,5 +185,14 @@
     "Delete" : "Eliminar",
     "Background deleted successfully!" : "Fondo eliminado satisfactoriamente!",
     "Error deleting, background in use!" : "Error al eliminar, fondo en uso!",
-    "Edit backgrounds" : "Editar fondos"
+    "Edit backgrounds" : "Editar fondos",
+    "Types" : "Tipos", 
+    "New type" : "Nuevo tipo",
+    "Type name" : "Nombre del tipo",
+    "Type price" : "Precio del tipo",
+    "There is no type in the database" : "No hay tipos en la base de datos",
+    "Type deleted successfully!": "Tipo eliminado satisfactoriamente!",
+    "Error deleting, type in use!": "Error al eliminar, tipo en uso!",
+    "Edit types" : "Editar tipos",
+    "Type edited successfully!" : "Tipo editado satisfactoriamente!"
 }

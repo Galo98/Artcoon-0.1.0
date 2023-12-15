@@ -12,6 +12,8 @@ class BackgroundController extends Controller
 
     public function index()
     {
+        /* $this->authorize('viewAny'); */
+
         $backgrounds = Background::all();
 
         return view('background.showBackground', [
@@ -28,6 +30,7 @@ class BackgroundController extends Controller
     
     public function store(Request $request)
     {
+        
 
         $request->validate([
             'bkgName' => 'required',

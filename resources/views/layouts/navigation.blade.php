@@ -32,6 +32,9 @@
                     <x-nav-link :href="route('bkg.background')" :active="request()->routeIs('bkg.*')">
                         {{ __('Backgrounds') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('type.index')" :active="request()->routeIs('type.*')">
+                        {{ __('Types') }}
+                    </x-nav-link>
                     @endif
                 </div>
             </div>
@@ -98,6 +101,9 @@
             @if (auth()->user()->role_id == 1)
             <x-responsive-nav-link :href="route('bkg.background')" :active="request()->routeIs('bkg.*')">
                 {{ __('Backgrounds') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('type.index')" :active="request()->routeIs('type.*')">
+                {{ __('Types') }}
             </x-responsive-nav-link>
             @endif
         </div>

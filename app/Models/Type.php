@@ -10,6 +10,7 @@ class Type extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'type_name',
         'type_price'
     ];

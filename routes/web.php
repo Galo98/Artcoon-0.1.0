@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\BackgroundController;
+use App\Http\Controllers\TypeController;
+use App\Http\Controllers\CharacterController;
+use App\Http\Controllers\SizeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +35,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/backgrounds/{bkg}/edit', [BackgroundController::class, 'edit'])->name('bkg.editBackground');
     Route::put('/backgrounds/{bkg}', [BackgroundController::class, 'update'])->name('bkg.updateBackground');
     Route::delete('/backgrounds/{bkg}', [BackgroundController::class, 'destroy'])->name('bkg.deleteBackground');
+
+    Route::get('/types', [TypeController::class, 'index'])->name('type.index');
+    Route::post('/types', [TypeController::class, 'store'])->name('type.store');
+    Route::get('/types/{type}/edit', [TypeController::class, 'edit'])->name('type.edit');
+    Route::put('/types/{type}', [TypeController::class, 'update'])->name('type.update');
+    Route::delete('/types/{type}', [TypeController::class, 'destroy'])->name('type.destroy');
 });
 
 require __DIR__ . '/auth.php';
