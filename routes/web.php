@@ -29,6 +29,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/order', [OrderController::class, 'create'])->name('order.makeOrder');
     Route::post('/orderConfirm', [OrderController::class, 'confirm'])->name('order.confirmOrder');
     Route::post('/order', [OrderController::class, 'store'])->name('order.store');
+    Route::get('/order/{ord}/edit',[OrderController::class, 'edit'])->name('order.edit');
+    Route::put('/order/{ord}', [OrderController::class, 'update'])->name('order.update');
+    Route::delete('/order/{ord}', [OrderController::class, 'cancelar'])->name('order.delete');
 
     Route::get('/backgrounds',[BackgroundController::class, 'index'])->name('bkg.background');
     Route::post('/backgrounds', [BackgroundController::class, 'store'])->name('bkg.storeBackground');

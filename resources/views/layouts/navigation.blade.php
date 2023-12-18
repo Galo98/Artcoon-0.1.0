@@ -29,6 +29,9 @@
                     </x-nav-link>
                     @endif
                     @if (auth()->user()->role_id == 1)
+                    <x-nav-link :href="route('order.showOrders')" :active="request()->routeIs('order.showOrders')">
+                        {{ __('Manage orders') }}
+                    </x-nav-link>
                     <div class="hidden sm:flex sm:items-center sm:ms-6">
                         <x-dropdown>
                             <x-slot name="trigger">

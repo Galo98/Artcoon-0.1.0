@@ -12,24 +12,33 @@
                 @foreach ($orders as $order)
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg border-prin mb-5">
                     <div class="p-6 text-gray-900 dark:text-gray-100">
-                        <form class="flex flex-col justify-center items-center gap-4" method="POST" action="{{ route('order.confirmOrder') }}">
+                        <div class="flex flex-col justify-center items-center gap-4">
 
-                            @csrf
-
-                            <input type="hidden" name="orderID" value="{{$order->id}}">
+                            <p>{{__('User')}} : {{$order->user->email}} </p>
                             <p>{{__('Type of commission')}} : {{$order->type->type_name}} </p>
                             <p>{{__('Size of commission')}} : {{$order->size->size_name}}</p>
                             <p>{{__('Amount of characters')}} : {{$order->character->char_name}}</p>
                             <p>{{__('Kind of background')}} : {{$order->background->bkg_name}}</p>
-                            <p>{{__('Make it public')}} : {{$order->order_public == 1 ? __('Yes') : 'No'}}</p>
+                            <p>{{__('Make it public')}} : {{$order->order_public === 1 ? __('Yes') : 'No'}}</p>
                             <p>{{__('Total price')}} : USD {{$order->order_totPrice}} </p>
-                            <p>{{__('Payment approved?')}} : {{$order->order_pay == 1 ? __('Yes') : 'No'}}</p>
-                            <p>{{__('Payment link')}} : <x-nav-link href="{{$order->order_link}}" target="_blank">{{__('Pay')}}</x-nav-link> </p>
+                            <p>{{__('Payment approved?')}} : {{$order->order_pay === 1 ? __('Yes') : 'No'}}</p>
                             <p>{{__('Order state')}} : {{$order->state->state_name}} </p>
                             <p>{{__('Creation date')}} : {{$order->created_at}} </p>
                             <p>{{__('Last modification')}} : {{$order->updated_at}} </p>
 
-                        </form>
+                            @if($role === 1)
+
+                            <form method="GET">
+                                <x-primary-button formaction="{{ route('order.edit',$order) }}">{{__('Modify')}}</x-primary-button>
+                            </form>
+
+                            <form method="POST" action="{{ route('order.delete',$order) }}">
+                                @csrf
+                                @method('DELETE')
+                                <x-cancel-button>{{__('Delete')}}</x-cancel-button>
+                            </form>
+                        </div>
+                        @endif
                     </div>
                 </div>
                 @endforeach
@@ -37,7 +46,11 @@
             @else
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg border-prin ">
                 <div class="p-6 text-gray-900 dark:text-gray-100 gap-5 flex flex-col justify-center items-center">
+                    @if($role === 1)
+                    <p>{{__('There are no orders placed yet')}}</p>
+                    @else
                     <p>{{__('You have not placed orders yet')}}</p>
+                    @endif
                 </div>
             </div>
             @endif

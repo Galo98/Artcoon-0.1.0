@@ -208,5 +208,11 @@
     "Edit sizes" : "Editar tamaños",
     "Size name" : "Nombre del tamaño",
     "New size" : "Nuevo tamaño",
-    "Modify order form" : "Modificar formulario de pedidos"
+    "Modify order form" : "Modificar formulario de pedidos",
+    "Manage orders" : "Gestionar pedidos",
+    "User" : "Usuario",
+    "Edit orders" : "Editar pedidos",
+    "Order edited successfully!" : "Pedido editado satisfactoriamente!",
+    "Order canceled successfully!" : "Orden cancelada satisfactoriamente!",
+    "There are no orders placed yet" : "Aún no hay pedidos realizados"
 }

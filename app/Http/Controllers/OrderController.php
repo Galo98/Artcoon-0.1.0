@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\QueryException;
 use App\Models\Background;
 use App\Models\Character;
 use App\Models\Size;
@@ -15,12 +16,22 @@ class OrderController extends Controller
 {
 
     public function index()
-    {   
-        $allOrders = Order::with('type','size','background','character','state')->where('user_id',Auth::id())->get();
+    {   if(auth()->user()->role_id === 2){
 
+        $allOrders = Order::with('type','size','background','character','state')->where('user_id',Auth::id())->whereNotIn('state_id', [4])->get();
+        
         return view('order.showOrders',[
             'orders' => $allOrders
         ]);
+
+        } elseif (auth()->user()->role_id === 1) {
+            $allOrders = Order::with('type', 'size', 'background', 'character', 'state')->whereNotIn('state_id', [4])->get();
+
+            return view('order.showOrders', [
+                'orders' => $allOrders,
+                'role' => 1
+            ]);
+        }
     }
 
 
@@ -114,24 +125,46 @@ class OrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Order $order)
+    public function edit(Order $ord)
     {
-        //
+        
+        if (auth()->user()->role_id != 1) {
+            abort(403);
+        }
+        
+
+        return view('order.editOrder', [
+            'order' => $ord
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Order $order)
+    public function update(Request $request, Order $ord)
     {
-        //
+        if (auth()->user()->role_id != 1) {
+            abort(403);
+        }
+
+        $validated = $request->validate([
+            'state_id' => 'required',
+            'order_pay' => 'required'
+        ]);
+
+        $ord->update($validated);
+
+        return to_route('order.showOrders')->with('status', __('Order edited successfully!'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Order $order)
+    public function cancelar(Order $ord)
     {
-        //
+        
+        Order::where('id',$ord->id)->update(['state_id' => 4]);
+        return to_route('order.showOrders')->with('status', __('Order canceled successfully!'));
+        
     }
 }
