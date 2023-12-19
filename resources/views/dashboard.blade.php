@@ -16,7 +16,7 @@
                         @foreach($orders as $order)
 
                         <!-- Item 1 -->
-                        <div class="bg-white p-4 rounded-lg shadow-md mb-4 border-prin">
+                        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md mb-4 border-prin">
                             <h2 class="text-lg font-semibold mb-2">Usuario {{$order->user->email}}</h2>
                             <p class="text-gray-600">Fecha de aprobacion : {{$order->updated_at}}</p>
                         </div>
@@ -27,7 +27,7 @@
                     @else
 
                     <div class="container mx-auto mt-8">
-                        <div class="bg-white p-4 rounded-lg shadow-md mb-4 border-prin">
+                        <div class="bg-white p-4 dark:bg-gray-800 rounded-lg shadow-md mb-4 border-prin">
                             <h2 class="text-lg font-semibold mb-2"> {{__('No orders have been approved yet!')}} </h2>
                         </div>
                     </div>
