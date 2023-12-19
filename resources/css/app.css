@@ -13,6 +13,7 @@
     --c5: #f988ff;
     --c6: #FF90AA;
     --c7: #9b9696;
+    --c8: #df1d1d;
 
 }
 
@@ -26,4 +27,8 @@
 
 .bg-sec {
     background-color: var(--c7);
+}
+
+.bg-oscurito{
+    background-color: var(--c8);
 }
