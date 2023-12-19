@@ -15,13 +15,23 @@ use Illuminate\Http\Request;
 class OrderController extends Controller
 {
 
+    public function list(){
+
+        $allOrders = Order::where('order_pay', 1)->orderBy('updated_at', 'desc')->get();
+
+        return view('dashboard', [
+            'orders' => $allOrders
+        ]);
+    }
+
     public function index()
     {   if(auth()->user()->role_id === 2){
 
         $allOrders = Order::with('type','size','background','character','state')->where('user_id',Auth::id())->whereNotIn('state_id', [4])->get();
         
         return view('order.showOrders',[
-            'orders' => $allOrders
+            'orders' => $allOrders,
+            'role' => auth()->user()->role_id
         ]);
 
         } elseif (auth()->user()->role_id === 1) {
@@ -29,7 +39,7 @@ class OrderController extends Controller
 
             return view('order.showOrders', [
                 'orders' => $allOrders,
-                'role' => 1
+                'role' => auth()->user()->role_id
             ]);
         }
     }

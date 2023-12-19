@@ -7,8 +7,8 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            @if (count($orders) >0)
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
+            <div class="grid grid-cols-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
+                @if (count($orders) >0)
                 @foreach ($orders as $order)
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg border-prin mb-5">
                     <div class="p-6 text-gray-900 dark:text-gray-100">
@@ -27,22 +27,21 @@
                             <p>{{__('Last modification')}} : {{$order->updated_at}} </p>
 
                             @if($role === 1)
-
                             <form method="GET">
                                 <x-primary-button formaction="{{ route('order.edit',$order) }}">{{__('Modify')}}</x-primary-button>
                             </form>
-
                             <form method="POST" action="{{ route('order.delete',$order) }}">
                                 @csrf
                                 @method('DELETE')
                                 <x-cancel-button>{{__('Delete')}}</x-cancel-button>
                             </form>
+                            @endif
                         </div>
-                        @endif
                     </div>
                 </div>
                 @endforeach
             </div>
+
             @else
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg border-prin ">
                 <div class="p-6 text-gray-900 dark:text-gray-100 gap-5 flex flex-col justify-center items-center">
