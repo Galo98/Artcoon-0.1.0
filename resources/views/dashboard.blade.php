@@ -24,6 +24,14 @@
                         @endforeach
                     </div>
 
+                    @else
+
+                    <div class="container mx-auto mt-8">
+                        <div class="bg-white p-4 rounded-lg shadow-md mb-4 border-prin">
+                            <h2 class="text-lg font-semibold mb-2"> {{__('No orders have been approved yet!')}} </h2>
+                        </div>
+                    </div>
+
                     @endif
 
                 </div>
