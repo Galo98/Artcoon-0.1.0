@@ -36,127 +36,65 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg border-prin">
                 <div class="p-6 text-gray-900 dark:text-gray-100 ">
 
-                    <form class="flex flex-col justify-center items-center gap-4" method="POST" action="{{ route('order.store') }}" onsubmit="return validarFormulario()">
+                    <form class="flex flex-col justify-center items-center gap-4" method="POST" action="{{ route('order.confirmOrder') }}">
 
                         @csrf
 
                         <div>
                             <label for="type">{{__('Type of commission')}}</label>
                             <select class="flex-grow-0 form-select dark:bg-transparent rounded-md" name="type" id="type" title="{{__('Type of commission')}}" description="{{__('Select the type of commission')}}">
-                                <option value="" selected>{{__('Select an option')}}</option>
-                                <option value="1">Scketch</option>
-                                <option value="2">Simple color</option>
-                                <option value="3">Full color</option>
+                                <option value="">{{__('Select an option')}}</option>
+                                @foreach($types as $data)
+                                <option value="{{$data->id}}" {{ old('type') || request('type') == $data->id ? 'selected' : '' }}>{{$data->type_name}}</option>
+                                @endforeach
                             </select>
-                            <div id="errortype" class="error-message"></div>
+                            <x-input-error :messages="$errors->get('type')" />
                         </div>
 
                         <div>
                             <label for="size">{{__('Size of commission')}}</label>
-                            <select class="flex-grow-0 form-select dark:bg-transparent" name="size" id="size" title="{{__('Size of commission')}}" description="{{__('Select the size of commission')}}">
-                                <option value="" selected>{{__('Select an option')}}</option>
-                                <option value="1">Icon</option>
-                                <option value="2">Half body</option>
-                                <option value="3">Full body</option>
+                            <select class="flex-grow-0 form-select dark:bg-transparent rounded-md" name="size" id="size" title="{{__('Size of commission')}}" description="{{__('Select the size of commission')}}">
+                                <option value="">{{__('Select an option')}}</option>
+                                @foreach($sizes as $data)
+                                <option value="{{$data->id}}" {{ old('size') || request('size') == $data->id ? 'selected' : '' }}>{{$data->size_name}}</option>
+                                @endforeach
+
                             </select>
-                            <div id="errorsize" class="error-message"></div>
+                            <x-input-error :messages="$errors->get('size')" />
                         </div>
 
                         <div>
                             <label for="characters">{{__('Amount of characters')}}</label>
-                            <select class="flex-grow-0 form-select dark:bg-transparent" name="characters" id="characters" title="{{__('Amount of characters')}}" description="{{__('Select the amount of characters')}}">
-                                <option value="" selected>{{__('Select an option')}}</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            <select class="flex-grow-0 form-select dark:bg-transparent rounded-md" name="characters" id="characters" title="{{__('Amount of characters')}}" description="{{__('Select the amount of characters')}}">
+                                <option value="">{{__('Select an option')}}</option>
+                                @foreach($chars as $data)
+                                <option value="{{$data->id}}" {{ old('characters') || request('characters') == $data->id ? 'selected' : '' }}>{{$data->char_name}}</option>
+                                @endforeach
                             </select>
-                            <div id="errorcharacters" class="error-message"></div>
+                            <x-input-error :messages="$errors->get('characters')" />
                         </div>
 
                         <div>
-                            <label for="bkg">{{__('Kind of background')}}</label>
-                            <select class="flex-grow-0 form-select dark:bg-transparent" name="bkg" id="bkg" title="{{__('Kind of background')}}" description="{{__('Select the kind of background')}}">
-                                <option value="" selected>{{__('Select an option')}}</option>
-                                <option value="1">{{__('Transparent')}}</option>
-                                <option value="2">{{__('Plain')}}</option>
-                                <option value="3">{{__('Simple')}}</option>
-                                <option value="4">{{__('Complex')}}</option>
+                            <label for="background">{{__('Kind of background')}}</label>
+                            <select class="flex-grow-0 form-select dark:bg-transparent rounded-md" name="background" id="background" title="{{__('Kind of background')}}" description="{{__('Select the kind of background')}}">
+                                <option value="">{{__('Select an option')}}</option>
+                                @foreach($bkgs as $data)
+                                <option value="{{$data->id}}" {{ old('background') || request('background') == $data->id ? 'selected' : '' }}>{{$data->bkg_name}}</option>
+                                @endforeach
                             </select>
-                            <div id="errorbkg" class="error-message"></div>
+                            <x-input-error :messages="$errors->get('background')" />
                         </div>
 
                         <div>
                             <label for="pub">{{__('Make it public')}}</label>
-                            <input type="checkbox" name="pub" id="pub" checked title="{{__('Make it public when it\'s finished')}}" description="{{__('Make it public when it\'s finished')}}">
+                            <input type="checkbox" name="pub" id="pub" {{ old('pub') == 'on' || request('pub') == 'on'  ? 'checked' : '' }} title="{{__('Make it public when it\'s finished')}}" description="{{__('Make it public when it\'s finished')}}">
                         </div>
 
-                        <div class="popup hidden fixed w-1/3 h-1/3 flex flex-col gap-2 justify-center items-center bg-white border-2 border-#FF90AA">
-                            <h1 class="text-2xl font-bold">{{__('Order review')}}</h1>
 
-                            <p>{{__('Type of commission')}} : </p>
-                            <p>{{__('Size of commission')}} : </p>
-                            <p>{{__('Amount of characters')}} : </p>
-                            <p>{{__('Kind of background')}} : </p>
-                            <p>{{__('Make it public')}} : </p>
-                            <p>{{__('Total price')}} : </p>
-
-
-
-                            <p></p>
-
-
-                            <div>
-                                <x-primary-button class="sendOrder">{{__('Make the order')}}</x-primary-button>
-                                <x-secondary-button class="send-close">{{__('Close and modify')}}</x-secondary-button>
-                            </div>
-                        </div>
-                        <!-- 
-                        <x-dropdown>
-                            <x-slot:trigger>titulo</x-slot:trigger>
-                            <x-slot:content>A</x-slot:content>
-                        </x-dropdown> -->
-
-
-                        <x-primary-button class="send">{{__('Make the order')}}</x-primary-button>
+                        <x-primary-button>{{__('Make the order')}}</x-primary-button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </x-app-layout>
-
-<script>
-    function validarFormulario() {
-        var camposSelect = document.querySelectorAll('.form-select');
-        var validacionCorrecta = true;
-
-        camposSelect.forEach(function(campo) {
-            var campoId = campo.id;
-            var valorSeleccionado = campo.value;
-            var errorCampo = document.getElementById('error' + campoId);
-
-            if (valorSeleccionado === '') {
-                errorCampo.innerHTML = "{{__('Please, select an option')}}";
-                validacionCorrecta = false;
-            } else {
-                errorCampo.innerHTML = '';
-            }
-        });
-
-        return validacionCorrecta;
-    }
-    document.querySelector(".send").addEventListener("click", function() {
-        event.preventDefault();
-        validacion = validarFormulario();
-        if (validacion) {
-            // Mostrar el pop up
-            document.querySelector(".popup").classList.remove("hidden");
-        }
-    });
-
-
-    document.querySelector(".send-close").addEventListener("click", function() {
-        document.querySelector(".popup").classList.add("hidden");
-        event.preventDefault();
-    });
-</script>

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('characters', function (Blueprint $table) {
             $table->id();
             $table->string('char_name');
-            $table->float('char_price', 4, 2)->nullable();
+            $table->float('char_price', 8, 2)->nullable();
             $table->timestamps();
         });
         DB::table('characters')->insert([

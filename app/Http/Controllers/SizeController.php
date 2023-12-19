@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Size;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class SizeController extends Controller
@@ -11,8 +12,15 @@ class SizeController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
+    {   
+        if(auth()->user()->role_id != 1){
+            abort(403);
+        }
+            $sizes = Size::all();
+            return view('size.showSize', [
+                'sizes' => $sizes
+            ]);
+
     }
 
     /**
@@ -28,7 +36,20 @@ class SizeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (auth()->user()->role_id != 1) {
+            abort(403);
+        }
+        $request->validate([
+            'size_name' => 'required',
+            'size_price' => 'required',
+        ]);
+
+        Size::create([
+            'size_name'  => $request->get('size_name'),
+            'size_price' => $request->get('size_price')
+        ]);
+
+        return to_route('size.index')->with('status', __('Size created successfully!'));
     }
 
     /**
@@ -44,7 +65,12 @@ class SizeController extends Controller
      */
     public function edit(Size $size)
     {
-        //
+        if (auth()->user()->role_id != 1) {
+            abort(403);
+        }
+        return view('size.editSize', [
+            'size' => $size
+        ]);
     }
 
     /**
@@ -52,7 +78,17 @@ class SizeController extends Controller
      */
     public function update(Request $request, Size $size)
     {
-        //
+        if (auth()->user()->role_id != 1) {
+            abort(403);
+        }
+        $validated = $request->validate([
+            'size_name' => 'required',
+            'size_price' => ['required', 'min:1', 'max:4'],
+        ]);
+
+        $size->update($validated);
+
+        return to_route('size.index')->with('status', __('Size edited successfully!'));
     }
 
     /**
@@ -60,6 +96,13 @@ class SizeController extends Controller
      */
     public function destroy(Size $size)
     {
-        //
+        try {
+            $this->authorize('delete', $size);
+            $size->delete();
+            return to_route('size.index')->with('status', __('Size deleted successfully!'));
+        } catch (QueryException $e) {
+            return to_route('size.index')->with('error', __('Error deleting, size in use!'));
+        }
+    
     }
 }

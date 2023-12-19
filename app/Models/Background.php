@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Background extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'id',
+        'bkg_name',
+        'bkg_price'
+    ];
 }

@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('types', function (Blueprint $table) {
             $table->id();
             $table->string('type_name');
-            $table->float('type_price', 4, 2)->nullable();
+            $table->float('type_price', 8, 2)->nullable();
             $table->timestamps();
         });
 

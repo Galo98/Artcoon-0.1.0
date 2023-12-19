@@ -6,6 +6,7 @@ use App\Models\Background;
 use App\Models\Character;
 use App\Models\Size;
 use App\Models\Type;
+use App\Models\State;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -29,6 +30,7 @@ class Order extends Model
         'size_id',
         'character_id',
         'bkg_id',
+        'state_id'
     ];
 
     public function type()
@@ -54,5 +56,10 @@ class Order extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function state()
+    {
+        return $this->belongsTo(State::class, 'state_id');
     }
 }
