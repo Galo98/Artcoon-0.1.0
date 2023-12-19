@@ -16,7 +16,7 @@ return new class extends Migration
             $table->float('order_totPrice', 8, 2)->nullable();
             $table->dateTime('order_date')->default(now());
             $table->dateTime('order_delivery')->nullable();
-            $table->int('order_pay', 1)->default(2);
+            $table->integer('order_pay')->default(2);
             $table->string('order_link');
             $table->boolean('order_public');
             $table->timestamps();
