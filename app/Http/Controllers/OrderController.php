@@ -20,7 +20,7 @@ class OrderController extends Controller
 
         $allOrders = Order::where('order_pay', 1)
             ->whereNotIn('state_id', [3, 4])
-            ->orderBy('updated_at', 'desc')
+            ->orderBy('updated_at', 'asc')
             ->get();
 
 
@@ -52,6 +52,9 @@ class OrderController extends Controller
 
     public function create()
     {
+        if (auth()->user()->role_id != 2) {
+            abort(403);
+        }
         $types = Type::all();
         $sizes = Size::all();
         $chars = Character::all();
@@ -67,6 +70,9 @@ class OrderController extends Controller
 
     public function confirm(Request $request)
     {
+        if (auth()->user()->role_id != 2) {
+            abort(403);
+        }
         $request->validate([
             'type' => 'required',
             'size' => 'required',
@@ -98,6 +104,9 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
+        if (auth()->user()->role_id != 2) {
+            abort(403);
+        }
         $request->validate([
             'type' => 'required',
             'size' => 'required',
