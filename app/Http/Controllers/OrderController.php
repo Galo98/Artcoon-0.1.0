@@ -15,9 +15,14 @@ use Illuminate\Http\Request;
 class OrderController extends Controller
 {
 
-    public function list(){
+    public function list()
+    {
 
-        $allOrders = Order::where('order_pay', 1)->orderBy('updated_at', 'desc')->get();
+        $allOrders = Order::where('order_pay', 1)
+            ->whereNotIn('state_id', [3, 4])
+            ->orderBy('updated_at', 'desc')
+            ->get();
+
 
         return view('dashboard', [
             'orders' => $allOrders
@@ -25,15 +30,15 @@ class OrderController extends Controller
     }
 
     public function index()
-    {   if(auth()->user()->role_id === 2){
+    {
+        if (auth()->user()->role_id === 2) {
 
-        $allOrders = Order::with('type','size','background','character','state')->where('user_id',Auth::id())->whereNotIn('state_id', [4])->get();
-        
-        return view('order.showOrders',[
-            'orders' => $allOrders,
-            'role' => auth()->user()->role_id
-        ]);
+            $allOrders = Order::with('type', 'size', 'background', 'character', 'state')->where('user_id', Auth::id())->whereNotIn('state_id', [4])->get();
 
+            return view('order.showOrders', [
+                'orders' => $allOrders,
+                'role' => auth()->user()->role_id
+            ]);
         } elseif (auth()->user()->role_id === 1) {
             $allOrders = Order::with('type', 'size', 'background', 'character', 'state')->whereNotIn('state_id', [4])->get();
 
@@ -51,8 +56,8 @@ class OrderController extends Controller
         $sizes = Size::all();
         $chars = Character::all();
         $bkgs = Background::all();
-        
-        return view('order.makeOrder',[
+
+        return view('order.makeOrder', [
             'types' => $types,
             'sizes' => $sizes,
             'chars' => $chars,
@@ -61,7 +66,7 @@ class OrderController extends Controller
     }
 
     public function confirm(Request $request)
-    {   
+    {
         $request->validate([
             'type' => 'required',
             'size' => 'required',
@@ -69,19 +74,19 @@ class OrderController extends Controller
             'background' => 'required',
         ]);
 
-        $typeDesc = Type::select('type_name','type_price')->find($request->get('type'));
+        $typeDesc = Type::select('type_name', 'type_price')->find($request->get('type'));
         /* $typeDesc = Type::all(); */
-        $sizeDesc = Size::select('size_name','size_price')->find($request->get('size'));
-        $charDesc = Character::select('char_name','char_price')->find($request->get('characters'));
-        $backDesc = Background::select('bkg_name','bkg_price')->find($request->get('background'));
+        $sizeDesc = Size::select('size_name', 'size_price')->find($request->get('size'));
+        $charDesc = Character::select('char_name', 'char_price')->find($request->get('characters'));
+        $backDesc = Background::select('bkg_name', 'bkg_price')->find($request->get('background'));
 
         $total = Background::where('id', $request->get('background'))->value('bkg_price')
-        + Character::where('id', $request->get('characters'))->value('char_price')
-        + Size::where('id', $request->get('size'))->value('size_price')
-        + Type::where('id', $request->get('type'))->value('type_price');
+            + Character::where('id', $request->get('characters'))->value('char_price')
+            + Size::where('id', $request->get('size'))->value('size_price')
+            + Type::where('id', $request->get('type'))->value('type_price');
 
 
-        return view('order.confirmOrder',[
+        return view('order.confirmOrder', [
             'typeDesc' => $typeDesc,
             'sizeDesc' => $sizeDesc,
             'charDesc' => $charDesc,
@@ -110,7 +115,7 @@ class OrderController extends Controller
 
         Order::create([
             'order_totPrice' => $request->get('total'),
-            'order_link'     => 'paypal.com',
+            'order_link'     => 'https://paypal.me/mdaisteach?country.x=AR&locale.x=es_XC',
             'order_public'   => $orderPublic,
             'user_id'        => auth()->id(),
             'type_id'        => $request->get('type'),
@@ -137,11 +142,11 @@ class OrderController extends Controller
      */
     public function edit(Order $ord)
     {
-        
+
         if (auth()->user()->role_id != 1) {
             abort(403);
         }
-        
+
 
         return view('order.editOrder', [
             'order' => $ord
@@ -162,7 +167,15 @@ class OrderController extends Controller
             'order_pay' => 'required'
         ]);
 
-        $ord->update($validated);
+        if ($request->state_id == 3) {
+            $ord->update([
+                'state_id' => $validated['state_id'],
+                'order_pay' => $validated['order_pay'],
+                'order_delivery' => now()
+            ]);
+        } else {
+            $ord->update($validated);
+        }
 
         return to_route('order.showOrders')->with('status', __('Order edited successfully!'));
     }
@@ -172,9 +185,8 @@ class OrderController extends Controller
      */
     public function cancelar(Order $ord)
     {
-        
-        Order::where('id',$ord->id)->update(['state_id' => 4]);
+
+        Order::where('id', $ord->id)->update(['state_id' => 4]);
         return to_route('order.showOrders')->with('status', __('Order canceled successfully!'));
-        
     }
 }

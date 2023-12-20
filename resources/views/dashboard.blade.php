@@ -10,14 +10,14 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
-                    @if(count($orders) > 1)
+                    @if(count($orders) >= 1)
                     <div class="container mx-auto mt-8">
-
                         @foreach($orders as $order)
 
                         <!-- Item 1 -->
                         <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md mb-4 border-prin">
                             <h2 class="text-lg font-semibold mb-2">Usuario {{$order->user->email}}</h2>
+                            <p class="text-gray-600">Estado : {{$order->state->state_name}}</p>
                             <p class="text-gray-600">Fecha de aprobacion : {{$order->updated_at}}</p>
                         </div>
 

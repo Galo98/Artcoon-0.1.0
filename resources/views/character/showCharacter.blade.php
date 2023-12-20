@@ -33,8 +33,8 @@
                     <div class="p-6 text-gray-900 dark:text-gray-100">
 
                         <div class="flex flex-col justify-center items-center gap-4">
-                            <p>{{__('Background name')}} : {{$char->char_name}} </p>
-                            <p>{{__('Background price')}} : {{$char->char_price}}</p>
+                            <p>{{__('Character name')}} : {{$char->char_name}} </p>
+                            <p>{{__('Character price')}} : {{$char->char_price}}</p>
 
                             <form method="GET">
                                 <x-primary-button formaction="{{ route('char.edit',$char) }}">{{__('Modify')}}</x-primary-button>

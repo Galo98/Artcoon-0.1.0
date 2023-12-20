@@ -21,15 +21,24 @@
                             <p>{{__('Kind of background')}} : {{$order->background->bkg_name}}</p>
                             <p>{{__('Make it public')}} : {{$order->order_public === 1 ? __('Yes') : 'No'}}</p>
                             <p>{{__('Total price')}} : USD {{$order->order_totPrice}} </p>
+                            @if(auth()->user()->role_id == 2)
+                            <p>{{__('Payment link')}} : <x-nav-link href="{{$order->order_link}}" target="_blank">{{__('Pay')}}</x-nav-link> </p>
+                            @endif
                             <p>{{__('Payment approved?')}} : {{$order->order_pay === 1 ? __('Yes') : 'No'}}</p>
                             <p>{{__('Order state')}} : {{$order->state->state_name}} </p>
                             <p>{{__('Creation date')}} : {{$order->created_at}} </p>
                             <p>{{__('Last modification')}} : {{$order->updated_at}} </p>
+                            @if($order->order_delivery)
+                            <p>{{__('Deadline')}} : {{$order->order_delivery}} </p>
+                            @endif
 
                             @if($role === 1)
+
+                            @if($order->order_delivery == null)
                             <form method="GET">
                                 <x-primary-button formaction="{{ route('order.edit',$order) }}">{{__('Modify')}}</x-primary-button>
                             </form>
+                            @endif
                             <form method="POST" action="{{ route('order.delete',$order) }}">
                                 @csrf
                                 @method('DELETE')
